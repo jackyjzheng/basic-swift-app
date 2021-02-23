@@ -15,6 +15,8 @@
 		9B36B1B125E4B033008671E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B36B1AF25E4B033008671E5 /* LaunchScreen.storyboard */; };
 		9B36B1BC25E4B034008671E5 /* basic_swift_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B36B1BB25E4B034008671E5 /* basic_swift_appTests.swift */; };
 		9B36B1C725E4B034008671E5 /* basic_swift_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B36B1C625E4B034008671E5 /* basic_swift_appUITests.swift */; };
+		9B36B1D825E4B121008671E5 /* SelfieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B36B1D725E4B120008671E5 /* SelfieStore.swift */; };
+		9B36B1E725E4B1E3008671E5 /* SelfieStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B36B1E625E4B1E3008671E5 /* SelfieStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		9B36B1C225E4B034008671E5 /* basic-swift-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "basic-swift-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B36B1C625E4B034008671E5 /* basic_swift_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = basic_swift_appUITests.swift; sourceTree = "<group>"; };
 		9B36B1C825E4B034008671E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B36B1D725E4B120008671E5 /* SelfieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieStore.swift; sourceTree = "<group>"; };
+		9B36B1E625E4B1E3008671E5 /* SelfieStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 				9B36B1A425E4B02F008671E5 /* AppDelegate.swift */,
 				9B36B1A625E4B02F008671E5 /* SceneDelegate.swift */,
 				9B36B1A825E4B02F008671E5 /* ViewController.swift */,
+				9B36B1D725E4B120008671E5 /* SelfieStore.swift */,
 				9B36B1AA25E4B02F008671E5 /* Main.storyboard */,
 				9B36B1AD25E4B033008671E5 /* Assets.xcassets */,
 				9B36B1AF25E4B033008671E5 /* LaunchScreen.storyboard */,
@@ -113,6 +118,7 @@
 		9B36B1BA25E4B034008671E5 /* basic-swift-appTests */ = {
 			isa = PBXGroup;
 			children = (
+				9B36B1E625E4B1E3008671E5 /* SelfieStoreTests.swift */,
 				9B36B1BB25E4B034008671E5 /* basic_swift_appTests.swift */,
 				9B36B1BD25E4B034008671E5 /* Info.plist */,
 			);
@@ -259,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B36B1A925E4B02F008671E5 /* ViewController.swift in Sources */,
+				9B36B1D825E4B121008671E5 /* SelfieStore.swift in Sources */,
 				9B36B1A525E4B02F008671E5 /* AppDelegate.swift in Sources */,
 				9B36B1A725E4B02F008671E5 /* SceneDelegate.swift in Sources */,
 			);
@@ -269,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B36B1BC25E4B034008671E5 /* basic_swift_appTests.swift in Sources */,
+				9B36B1E725E4B1E3008671E5 /* SelfieStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
