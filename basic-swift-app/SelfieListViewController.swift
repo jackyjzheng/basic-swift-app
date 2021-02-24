@@ -10,6 +10,12 @@ import UIKit
 class SelfieListViewController: UITableViewController {
     var selfies : [Selfie] = []
     var detailViewController: DetailViewController?
+    let timeIntervalFormatter : DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .spellOut
+        formatter.maximumUnitCount = 1
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,34 +65,48 @@ class SelfieListViewController: UITableViewController {
         return selfies.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let selfie = selfies[indexPath.row]
         cell.textLabel?.text = selfie.title
+        if let interval = timeIntervalFormatter.string(from: selfie.created, to: Date())
+        {
+            cell.detailTextLabel?.text = "\(interval) ago"
+        }
+        else
+        {
+            cell.detailTextLabel?.text = nil
+        }
+        cell.imageView?.image = selfie.image
         return cell
     }
     
-
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let selfieToRemove = selfies[indexPath.row]
+            do
+            {
+                try SelfieStore.shared.delete(selfie: selfieToRemove)
+                selfies.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            catch
+            {
+                let title = selfieToRemove.title
+                showError(message: "Failed to delete \(title).")
+            }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            return
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
