@@ -9,7 +9,7 @@ import UIKit
 
 class SelfieListViewController: UITableViewController {
     var selfies : [Selfie] = []
-    var detailViewController: DetailViewController?
+    var detailViewController: SelfieDetailViewController?
     let timeIntervalFormatter : DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .spellOut
@@ -35,7 +35,7 @@ class SelfieListViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1]
                                         as? UINavigationController)?.topViewController
-                                        as? DetailViewController
+                                        as? SelfieDetailViewController
         }
         // Uncomment the follow     ing line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -125,6 +125,11 @@ class SelfieListViewController: UITableViewController {
         return true
     }
     
+    override func tableView(_ tableview: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        performSegue(withIdentifier: "showDetail", sender: self)
+    }
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -161,15 +166,29 @@ class SelfieListViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail"
+        {
+            if let indexPath = tableView.indexPathForSelectedRow
+            {
+                let selfie = selfies[indexPath.row]
+                //if let controller = (segue.destination as? UINavigationController)?
+                //    .topViewController as? SelfieDetailViewController
+                if let controller = segue.destination as? SelfieDetailViewController
+                {
+                    controller.selfie = selfie
+                    //controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                    //controller.navigationItem.leftItemsSupplementBackButton = true
+                }
+            }
+        }
     }
-    */
 }
 
 extension SelfieListViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate
