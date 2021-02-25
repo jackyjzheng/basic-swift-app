@@ -19,6 +19,8 @@ class SelfieListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let addSelfieButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewSelfie))
+        navigationItem.rightBarButtonItem = addSelfieButton
         do
         {
             selfies = try SelfieStore.shared.listSelfies()
@@ -42,6 +44,42 @@ class SelfieListViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    @objc func createNewSelfie()
+    {
+        let imagePicker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera)
+        {
+            imagePicker.sourceType = .camera
+            if UIImagePickerController.isCameraDeviceAvailable(.front)
+            {
+                imagePicker.cameraDevice = .front
+            }
+        }
+        else
+        {
+            imagePicker.sourceType = .photoLibrary
+        }
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func newSelfieTaken(image: UIImage)
+    {
+        let newSelfie = Selfie(title: "New Selfie")
+        newSelfie.image = image
+        do
+        {
+            try SelfieStore.shared.save(selfie: newSelfie)
+        }
+        catch let error
+        {
+            showError(message: "Cant save photo: \(error)")
+            return
+        }
+        selfies.insert(newSelfie, at: 0)
+        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+    }
+    
     func showError(message: String)
     {
         let alert = UIAlertController(title: "Error",
@@ -52,7 +90,7 @@ class SelfieListViewController: UITableViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -132,5 +170,26 @@ class SelfieListViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension SelfieListViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate
+{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        picker.dismiss(animated: true) // Need to understand PickerController control flow better, there should be better place to do this in control flow
+        guard let image = info[.originalImage] as? UIImage
+        else
+        {
+            let message = "Couldn't get a picture from the image picker!"
+            showError(message: message)
+            return
+        }
+        self.newSelfieTaken(image: image)
+        self.dismiss(animated: true, completion: nil)
+    }
 }
