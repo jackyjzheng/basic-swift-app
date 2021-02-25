@@ -52,5 +52,19 @@ class SelfieDetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        self.selfieNameField.resignFirstResponder()
+        guard let selfie = selfie else
+        {
+            return
+        }
+        guard let text = selfieNameField?.text else
+        {
+            return
+        }
+        selfie.title = text
+        try? SelfieStore.shared.save(selfie: selfie)
+    }
 }
 

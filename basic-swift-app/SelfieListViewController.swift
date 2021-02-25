@@ -37,7 +37,7 @@ class SelfieListViewController: UITableViewController {
                                         as? UINavigationController)?.topViewController
                                         as? SelfieDetailViewController
         }
-        // Uncomment the follow     ing line to preserve selection between presentations
+        // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -93,6 +93,13 @@ class SelfieListViewController: UITableViewController {
     
     // MARK: - Table view data source
 
+    override func viewWillAppear(_ animated: Bool)
+    {
+        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
