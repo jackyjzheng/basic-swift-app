@@ -14,6 +14,7 @@ class SelfieDetailViewController: UIViewController {
     @IBOutlet weak var dateCreatedLabel: UILabel!
     @IBOutlet weak var selfieImageField: UIImageView!
     @IBOutlet weak var mapview: MKMapView!
+    @IBOutlet var expandMap: UITapGestureRecognizer!
     
     var selfie: Selfie? {
         didSet {
@@ -73,6 +74,20 @@ class SelfieDetailViewController: UIViewController {
         }
         selfie.title = text
         try? SelfieStore.shared.save(selfie: selfie)
+    }
+    
+    @IBAction func expandMap(_ sender: Any)
+    {
+        if let coordinate = self.selfie?.position?.location
+        {
+            print("test1")
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: coordinate.coordinate), MKLaunchOptionsMapTypeKey: NSNumber(value: MKMapType.mutedStandard.rawValue)]
+            let placemark = MKPlacemark(coordinate: coordinate.coordinate, addressDictionary: nil)
+            let item = MKMapItem(placemark: placemark)
+            item.name = selfie?.title
+            item.openInMaps(launchOptions: options)
+        }
+        print("here?")
     }
 }
 

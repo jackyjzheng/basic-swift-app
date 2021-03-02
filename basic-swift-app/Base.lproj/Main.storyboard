@@ -18,10 +18,14 @@
                         <subviews>
                             <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="mutedStandard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIu-u0-NIX">
                                 <rect key="frame" x="331" y="104" width="67" height="67"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="n2F-Qq-kTd"/>
                                     <constraint firstAttribute="width" constant="67" id="npe-jV-HWo"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Odt-9p-h2i" appends="YES" id="hkI-CG-NcD"/>
+                                </connections>
                             </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Selfie Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uVd-D2-hTh">
                                 <rect key="frame" x="16" y="104" width="307" height="30"/>
@@ -67,12 +71,14 @@
                     <navigationItem key="navigationItem" id="Njn-Xq-9kY"/>
                     <connections>
                         <outlet property="dateCreatedLabel" destination="rjn-Li-pp0" id="alv-KR-pls"/>
+                        <outlet property="expandMap" destination="Odt-9p-h2i" id="4wf-Ud-6aq"/>
                         <outlet property="mapview" destination="eIu-u0-NIX" id="gOa-uh-Nqn"/>
                         <outlet property="selfieImageField" destination="yuC-FG-HkP" id="Zak-lh-kau"/>
                         <outlet property="selfieNameField" destination="uVd-D2-hTh" id="3FQ-PH-uiD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gP0-Bj-ckP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Odt-9p-h2i"/>
             </objects>
             <point key="canvasLocation" x="-1371.0144927536232" y="538.39285714285711"/>
         </scene>
