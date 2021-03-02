@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>&quot;We&apos;ll use your location to add location info to your selfies&quot;</string>
 	<key>NSCameraUsageDescription</key>
 	<string>&quot;We use the camera to take those sweet, sweet selfies.&quot;</string>
 	<key>CFBundleDevelopmentRegion</key>
