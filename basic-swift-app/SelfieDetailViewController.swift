@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import MapKit
 
 class SelfieDetailViewController: UIViewController {
     
     @IBOutlet weak var selfieNameField: UITextField!
     @IBOutlet weak var dateCreatedLabel: UILabel!
     @IBOutlet weak var selfieImageField: UIImageView!
+    @IBOutlet weak var mapview: MKMapView!
     
     var selfie: Selfie? {
         didSet {
@@ -41,6 +43,12 @@ class SelfieDetailViewController: UIViewController {
         else
         {
             return
+        }
+        
+        if let position = selfie.position
+        {
+            self.mapview.setCenter(position.location.coordinate, animated: false)
+            mapview.isHidden = false
         }
         
         selfieNameField.text = selfie.title
