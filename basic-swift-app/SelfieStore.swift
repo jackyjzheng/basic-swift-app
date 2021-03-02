@@ -7,11 +7,39 @@
 
 import Foundation
 import UIKit.UIImage
+import CoreLocation.CLLocation
 
 class Selfie : Codable
 {
+    struct Coordinate : Codable, Equatable
+    {
+        var latitude : Double
+        var longitude : Double
+        public static func == (lhs: Selfie.Coordinate, rhs: Selfie.Coordinate) -> Bool
+        {
+            return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+        }
+        var location : CLLocation
+        {
+            get
+            {
+                return CLLocation(latitude: self.latitude, longitude: self.longitude)
+            }
+            set{
+                self.latitude = newValue.coordinate.latitude
+                self.longitude = newValue.coordinate.longitude
+            }
+        }
+        
+        init (location: CLLocation)
+        {
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+        }
+    }
     let created : Date
     let id : UUID
+    var position : Coordinate?
     var title = "New Selfie!"
     var image : UIImage?
     {

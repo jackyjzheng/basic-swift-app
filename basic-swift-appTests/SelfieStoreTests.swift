@@ -5,8 +5,9 @@
 //  Created by Jacky Zheng on 2/22/21.
 //
 
-import XCTest
 @testable import basic_swift_app
+import XCTest
+import CoreLocation
 import UIKit
 
 class SelfieStoreTests: XCTestCase {
@@ -72,5 +73,25 @@ class SelfieStoreTests: XCTestCase {
         let loadedSelfie = SelfieStore.shared.load(id: id)
         XCTAssertEqual(allSelfies.count - 1, selfieList.count, "There should be one less selfie")
         XCTAssertNil(loadedSelfie, "deleted selfie should be nil")
+    }
+    
+    func testLocationSelfie()
+    {
+        let location = CLLocation(latitude: -42.8819, longitude: 147.3238)
+        let newSelfie = Selfie(title: "Location Selfie")
+        let newImage = createImage(text: "🐑")
+        newSelfie.image = newImage
+        newSelfie.position = Selfie.Coordinate(location: location)
+        do
+        {
+            try SelfieStore.shared.save(selfie: newSelfie)
+        }
+        catch
+        {
+            XCTFail("failed to save the location selfie")
+        }
+        let loadedSelfie = SelfieStore.shared.load(id: newSelfie.id)
+        XCTAssertNotNil(loadedSelfie?.position)
+        XCTAssertEqual(newSelfie.position, loadedSelfie?.position)
     }
 }
